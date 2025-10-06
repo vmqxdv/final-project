@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body th:object="${genre}">
+  <div th:replace="fragments/navbar :: nav"></div>
+  <div class="container mt-5">
+
+    <section th:if="${genre != null}">
+      <h2 class="mb-3">Genere: [[*{name}]]</h2>
+
+      <h5 class="mb-3">Film di questo genere:</h5>
+      <div th:if="*{films != null and !films.isEmpty()}">
+        <ul class="list-group">
+          <li th:each="pizza : *{films}" class="list-group-item">
+            <a th:href="@{/films/{id}(id=${pizza.id})}" th:text="${pizza.name}"></a>
+          </li>
+        </ul>
+      </div>
+      <div th:unless="*{films != null and !films.isEmpty()}" class="alert alert-info mt-3">
+        Nessun film associato a questo genere.
+      </div>
+
+      <a th:href="@{/genres}" class="btn btn-secondary mt-4">Torna alla lista</a>
+    </section>
+
+    <div th:unless="${genre != null}" class="alert alert-danger text-center">
+      Genere non trovato.
+    </div>
+
+  </div>
+  <div th:replace="fragments/scripts :: script"></div>
+</body>
+
+</html>

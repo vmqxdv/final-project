@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+  <div th:replace="fragments/navbar :: nav"></div>
+  <div class="container mt-5">
+    <h2 class="mb-4" th:text="${edit} ? 'Modifica film' : 'Crea film'"></h2>
+
+    <form th:action="${edit} ? @{/films/edit/{id}(id=${film.id})} : @{/films/create}" th:object="${film}" method="post"
+      class="row g-3">
+
+      <div class="col-md-6">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text" th:field="*{name}" class="form-control" id="name" th:errorClass="is-invalid" required>
+        <div th:if="${#fields.hasErrors('name')}" class="text-danger small" th:errors="*{name}"></div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="duration" class="form-label">Durata (min)</label>
+        <input type="number" step="1" min="0" th:field="*{duration}" class="form-control" id="duration"
+          th:errorClass="is-invalid" required>
+        <div th:if="${#fields.hasErrors('duration')}" class="text-danger small" th:errors="*{duration}"></div>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Generi</label>
+
+        <div class="border rounded p-2" style="max-height: 10vh; overflow-y: auto;">
+          <div class="form-check" th:each="genre : ${genres}">
+            <input class="form-check-input" type="checkbox" th:field="*{genres}" th:value="${genre.id}" />
+            <label class="form-check-label" th:text="${genre.name}"></label>
+          </div>
+        </div>
+
+        <div th:if="${#fields.hasErrors('genres')}" class="text-danger small" th:errors="*{genres}"></div>
+      </div>
+
+      <div class="col-12">
+        <label for="image" class="form-label">URL Immagine</label>
+        <input type="url" th:field="*{image}" class="form-control" id="image" th:errorClass="is-invalid" required>
+        <div th:if="${#fields.hasErrors('image')}" class="text-danger small" th:errors="*{image}"></div>
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-success">Salva</button>
+        <a th:href="@{/films}" class="btn btn-secondary ms-2">Annulla</a>
+      </div>
+    </form>
+  </div>
+
+  <div th:replace="fragments/scripts :: script"></div>
+</body>
+
+</html>

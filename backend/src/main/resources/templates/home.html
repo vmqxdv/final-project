@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body>
+  <div th:replace="fragments/navbar :: nav"></div>
+  <div class="container mt-5">
+    <section>
+      <h1 class="display-4 mb-4">Benvenuto nel mio cinema!</h1>
+      <p class="lead">Scopri i nostri film!</p>
+      <a class="btn btn-primary btn-lg mt-3" th:href="@{/films}">Guarda la lista</a>
+    </section>
+  </div>
+  <div th:replace="fragments/scripts :: script"></div>
+</body>
+
+</html>
