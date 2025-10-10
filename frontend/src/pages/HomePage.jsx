@@ -1,45 +1,13 @@
-import axios from 'axios';
-import { useContext, useState, useEffect } from 'react';
-import PizzaCard from './../components/PizzaCard';
-// import GlobalContext from './../contexts/globalContext'
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
-
-  const [pizzas, setPizzas] = useState([]);
-  // const { setIsLoading } = useContext(GlobalContext);
-
-  const fetchPizzas = () => {
-    console.log('Caricando le pizze...');
-    // setIsLoading(true);
-
-    axios.get(import.meta.env.VITE_API_URL)
-      .then(response => {
-        console.log(response.data);
-
-        const { data } = response;
-
-        setPizzas(data);
-      })
-      .catch(err => {
-        console.error(err)
-      })
-      .then(() => {
-        // setIsLoading(false)
-      })
-  }
-
-  useEffect(fetchPizzas, []);
-
   return (
-    <>
-      <h1 className="text-primary">Boopizzeria</h1>
-      <section>
-        <h2><i>Nuove pizze ogni giorno</i></h2>
-        {
-          pizzas.map((p) => <PizzaCard key={p.id} pizza={p} isDetail={true} />)
-        }
-      </section>
-    </>
-  )
-
+    <div className="container text-center mt-5">
+      <h1 className="text-primary display-4 fw-bold mb-3">Boocinema</h1>
+      <h2 className="text-muted mb-4"><i>I migliori film di sempre!</i></h2>
+      <Link to="/films" className="btn btn-lg btn-outline-primary">
+        Vai alla lista
+      </Link>
+    </div>
+  );
 }

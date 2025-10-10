@@ -14,6 +14,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/films")
+@CrossOrigin("http://localhost:5173/")
 public class FilmRestController {
 
   @Autowired

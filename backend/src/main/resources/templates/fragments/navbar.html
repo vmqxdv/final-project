@@ -1,7 +1,7 @@
 <!-- fragments/navbar.html -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
   <div class="container-fluid">
-    <a class="navbar-brand" th:href="@{/}">Cinema</a>
+    <a class="navbar-brand" th:href="@{/}">Boocinema</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -12,12 +12,18 @@
           <a class="nav-link" th:href="@{/}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/films}">Lista Film</a>
+          <a class="nav-link" th:href="@{/films}">Film</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" th:href="@{/genres}">Generi</a>
         </li>
       </ul>
+    </div>
+
+    <div class="user-info" th:if="${#authorization.expression('isAuthenticated()')}">
+      Utente: <span sec:authentication="name" class="fw-bold me-2"></span>
+      Ruoli: <span sec:authentication="principal.authorities" class="fst-italic me-2"></span>
+      <a href="/logout" class="btn btn-sm btn-outline-primary">Esci</a>
     </div>
   </div>
 </nav>

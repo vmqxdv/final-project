@@ -30,11 +30,7 @@ public class FilmController {
 
   @GetMapping
   public String index(@RequestParam(required = false) String name, Model model) {
-    List<Film> films;
-    if (name != null && !name.isBlank()) {
-      films = filmService.findByName(name);
-    } else
-      films = filmService.findAll();
+    List<Film> films = name != null && !name.isBlank() ? filmService.findByName(name) : filmService.findAll();
 
     model.addAttribute("films", films);
 

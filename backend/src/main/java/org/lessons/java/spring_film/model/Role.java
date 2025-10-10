@@ -1,33 +1,32 @@
 package org.lessons.java.spring_film.model;
 
-import java.util.List;
+import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "genres")
-public class Genre {
+@Table(name = "roles")
+public class Role {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @NotNull
-  @Size(min = 3, max = 25, message = "Il nome deve contenere tra 3 e 25 caratteri")
+  @NotBlank(message = "Il nome non può essere vuoto o null")
   private String name;
 
-  @ManyToMany(mappedBy = "genres")
-  @JsonIgnore
-  private List<Film> films;
+  @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+  @JsonBackReference
+  private Set<User> users;
 
   public Integer getId() {
     return id;
@@ -45,16 +44,12 @@ public class Genre {
     this.name = name;
   }
 
-  public List<Film> getFilms() {
-    return films;
+  public Set<User> getUsers() {
+    return users;
   }
 
-  public void setFilms(List<Film> films) {
-    this.films = films;
+  public void setUsers(Set<User> users) {
+    this.users = users;
   }
 
-  @Override
-  public String toString() {
-    return name;
-  }
 }

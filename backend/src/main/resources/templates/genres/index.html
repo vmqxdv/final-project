@@ -21,7 +21,8 @@
           </form>
         </div>
         <div class="col-md-4 col-12 text-md-end mt-2 mt-md-0">
-          <a th:href="@{/genres/create}" class="btn btn-success">Aggiungi Genere</a>
+          <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/genres/create}" class="btn btn-success">Aggiungi
+            Genere</a>
         </div>
       </div>
       <div th:if="${#lists.isEmpty(genres)}" class="alert alert-warning text-center">
@@ -45,11 +46,12 @@
             <td>
               <div class="d-flex gap-2">
                 <a th:href="@{/genres/{id}(id=*{id})}" class="btn btn-sm btn-outline-primary">Dettagli</a>
-                <a th:href="@{/genres/edit/{id}(id=*{id})}" class="btn btn-sm btn-outline-primary">Modifica</a>
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/genres/edit/{id}(id=*{id})}"
+                  class="btn btn-sm btn-outline-primary">Modifica</a>
 
                 <!-- Bottone per far apparire modale -->
-                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                  th:attr="data-bs-target=${'#delete-modal-' + genre.id}">Elimina</button>
+                <button sec:authorize="hasAuthority('ADMIN')" type="button" class="btn btn-sm btn-outline-danger"
+                  data-bs-toggle="modal" th:attr="data-bs-target=${'#delete-modal-' + genre.id}">Elimina</button>
 
                 <!-- Modale -->
                 <div class="modal fade" th:id="${'delete-modal-' + genre.id}" tabindex="-1"
