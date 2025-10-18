@@ -20,6 +20,10 @@
       </ul>
     </div>
 
+    <div sec:authorize="isAnonymous()">
+      <a href="/login" class="btn btn-sm btn-primary">Accedi</a>
+    </div>
+
     <div class="user-info" th:if="${#authorization.expression('isAuthenticated()')}">
       Utente: <span sec:authentication="name" class="fw-bold me-2"></span>
       Ruoli: <span sec:authentication="principal.authorities" class="fst-italic me-2"></span>
