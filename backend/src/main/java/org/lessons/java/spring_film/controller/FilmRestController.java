@@ -61,7 +61,7 @@ public class FilmRestController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@Valid @PathVariable Integer id) {
+  public ResponseEntity<Void> delete(@PathVariable Integer id) {
     if (filmService.findById(id).isEmpty())
       return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 

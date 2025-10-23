@@ -70,7 +70,7 @@ public class GenreRestController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@Valid @PathVariable Integer id) {
+  public ResponseEntity<Void> delete(@PathVariable Integer id) {
     if (genreService.findById(id).isEmpty())
       return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 

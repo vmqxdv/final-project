@@ -68,7 +68,7 @@ public class GenreController {
   }
 
   @PostMapping("/edit/{id}")
-  public String update(@Valid @ModelAttribute("film") Genre formGenre, BindingResult bindingResult,
+  public String update(@Valid @ModelAttribute("genre") Genre formGenre, BindingResult bindingResult,
       Model model) {
     if (bindingResult.hasErrors())
       return "genres/create-or-edit";
