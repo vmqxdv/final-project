@@ -1,9 +1,9 @@
-import { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import { createContext, useState, useEffect, useContext } from "react";
+import axios from "axios";
 
 const GlobalContext = createContext();
 
-export function GlobalProvider({ children }) {
+export const GlobalProvider = ({ children }) => {
   const [films, setFilms] = useState([]);
   const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,10 +18,10 @@ export function GlobalProvider({ children }) {
         setFilms(filmsRes.data);
         setGenres(genresRes.data);
       } catch (error) {
-        console.error('Errore nel recupero dei dati:', error);
+        console.error("Errore nel recupero dei dati:", error);
       } finally {
         setLoading(false);
-      };
+      }
     };
 
     fetchData();
@@ -34,6 +34,4 @@ export function GlobalProvider({ children }) {
   );
 };
 
-export function useGlobalContext() {
-  return useContext(GlobalContext);
-};
+export const useGlobalContext = () => useContext(GlobalContext);

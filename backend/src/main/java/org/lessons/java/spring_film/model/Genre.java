@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +25,7 @@ public class Genre {
   @Size(min = 3, max = 25, message = "Il nome deve contenere tra 3 e 25 caratteri")
   private String name;
 
-  @ManyToMany(mappedBy = "genres", cascade = CascadeType.REMOVE)
+  @ManyToMany(mappedBy = "genres")
   @JsonIgnore
   private List<Film> films;
 

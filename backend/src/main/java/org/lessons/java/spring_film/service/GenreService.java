@@ -3,6 +3,7 @@ package org.lessons.java.spring_film.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.lessons.java.spring_film.model.Film;
 import org.lessons.java.spring_film.model.Genre;
 import org.lessons.java.spring_film.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,17 @@ public class GenreService {
   }
 
   public void deleteById(Integer id) {
-    genreRepository.deleteById(id);
+    Optional<Genre> genreAttempt = genreRepository.findById(id);
+
+    if (genreAttempt.isPresent()) {
+      Genre genre = genreAttempt.get();
+
+      for (Film film : genre.getFilms()) {
+        film.getGenres().remove(genre);
+      }
+
+      genreRepository.deleteById(genre.getId());
+    }
   }
 
   public void delete(Genre genre) {

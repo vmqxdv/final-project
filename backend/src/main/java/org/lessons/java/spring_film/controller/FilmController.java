@@ -3,8 +3,8 @@ package org.lessons.java.spring_film.controller;
 import java.util.List;
 
 import org.lessons.java.spring_film.model.Film;
-import org.lessons.java.spring_film.repository.GenreRepository;
 import org.lessons.java.spring_film.service.FilmService;
+import org.lessons.java.spring_film.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +26,7 @@ public class FilmController {
   private FilmService filmService;
 
   @Autowired
-  private GenreRepository genreRepository;
+  private GenreService genreService;
 
   @GetMapping
   public String index(@RequestParam(required = false) String name, Model model) {
@@ -47,7 +47,7 @@ public class FilmController {
   @GetMapping("/create")
   public String create(Model model) {
     model.addAttribute("film", new Film());
-    model.addAttribute("genres", genreRepository.findAll());
+    model.addAttribute("genres", genreService.findAll());
     model.addAttribute("edit", false);
 
     return "films/create-or-edit";
@@ -57,7 +57,7 @@ public class FilmController {
   public String store(@Valid @ModelAttribute("film") Film formFilm,
       BindingResult bindingResult, Model model) {
     if (bindingResult.hasErrors()) {
-      model.addAttribute("genres", genreRepository.findAll());
+      model.addAttribute("genres", genreService.findAll());
       model.addAttribute("edit", false);
 
       return "films/create-or-edit";
@@ -73,7 +73,7 @@ public class FilmController {
     Film film = filmService.getById(id);
 
     model.addAttribute("film", film);
-    model.addAttribute("genres", genreRepository.findAll());
+    model.addAttribute("genres", genreService.findAll());
     model.addAttribute("edit", true);
 
     return "films/create-or-edit";
@@ -83,7 +83,7 @@ public class FilmController {
   public String update(@Valid @ModelAttribute("film") Film formFilm,
       BindingResult bindingResult, Model model) {
     if (bindingResult.hasErrors()) {
-      model.addAttribute("genres", genreRepository.findAll());
+      model.addAttribute("genres", genreService.findAll());
       model.addAttribute("edit", true);
 
       return "films/create-or-edit";
