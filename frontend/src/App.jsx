@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import FilmDetail from './pages/FilmDetail';
 import FilmList from './pages/FilmList';
 import GenreList from './pages/GenreList';
-import GenreDetail from './pages/GenreDetail'
+import GenreDetail from './pages/GenreDetail';
 import { GlobalProvider } from './contexts/GlobalContext';
 
 function App() {

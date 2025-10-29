@@ -9,22 +9,16 @@ export const GlobalProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [filmsRes, genresRes] = await Promise.all([
-          axios.get(import.meta.env.VITE_API_URL_FILMS),
-          axios.get(import.meta.env.VITE_API_URL_GENRES),
-        ]);
+    Promise.all([
+      axios.get(import.meta.env.VITE_API_URL_FILMS),
+      axios.get(import.meta.env.VITE_API_URL_GENRES)
+    ])
+      .then(([filmsRes, genresRes]) => {
         setFilms(filmsRes.data);
         setGenres(genresRes.data);
-      } catch (error) {
-        console.error("Errore nel recupero dei dati:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+      })
+      .catch(err => console.error("Errore nel recupero dei dati:", err))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
