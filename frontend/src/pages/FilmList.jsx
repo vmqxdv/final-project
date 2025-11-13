@@ -1,5 +1,5 @@
 import FilmCard from '../components/FilmCard';
-import { useGlobalContext } from '../contexts/globalContext';
+import { useGlobalContext } from '../contexts/GlobalContext';
 
 export default function FilmList() {
   const { films } = useGlobalContext();

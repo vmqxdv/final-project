@@ -1,4 +1,4 @@
-import { useGlobalContext } from '../contexts/globalContext';
+import { useGlobalContext } from '../contexts/GlobalContext';
 import { Link } from 'react-router-dom';
 
 export default function GenreList() {

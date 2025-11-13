@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useGlobalContext } from "../contexts/globalContext";
+import { useGlobalContext } from "../contexts/GlobalContext";
 import FilmCard from "../components/FilmCard";
 
 export default function GenreDetail() {
